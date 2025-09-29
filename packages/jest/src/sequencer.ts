@@ -26,7 +26,7 @@ function getArg(name: string) {
 
 export default class JobSequencer extends Sequencer {
   // @ts-ignore
-  async sort(tests: Test[]) {
+  async sort(tests: Test[]): Test[] {
     let detected = detectEnv({
       indexName: "JEST_JOBS_INDEX",
       totalName: "JEST_JOBS_TOTAL",
@@ -79,11 +79,9 @@ export default class JobSequencer extends Sequencer {
       reports = removeDeletedFiles(reports, normalizedTests);
       reports = addNewFiles(reports, normalizedTests);
 
-      const groups = distribute(reports, total);
-
-      return groups[index].files.map((testFile) =>
-        normalizedTests.find((t) => t.path === testFile)
-      );
+      const files = distribute(reports, total)[index].files;
+      console.log(`total: ${total}, index: ${index}, #files: ${files.length}`);
+      return normalizedTests.filter((t) => files.includes(t.path));
     }
 
     return tests;

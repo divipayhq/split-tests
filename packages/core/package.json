@@ -1,6 +1,6 @@
 {
   "name": "@split-tests/core",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "internal",
   "author": {
     "name": "Kamil Kisiela",
@@ -25,16 +25,16 @@
     "access": "public"
   },
   "license": "MIT",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
-  "typings": "dist/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "typings": "dist/typings/index.d.ts",
   "typescript": {
-    "definition": "dist/index.d.ts"
+    "definition": "dist/typings/index.d.ts"
   },
   "scripts": {
     "prepack": "bob prepack"
   },
   "dependencies": {
-    "fast-xml-parser": "4.2.4"
+    "fast-xml-parser": "~4.2.7"
   }
 }

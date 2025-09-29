@@ -21,7 +21,7 @@ module.exports = {
           },
         ],
       ],
-  testSequencer: require.resolve("./packages/jest/dist/index.cjs"),
+  testSequencer: require.resolve("./packages/jest"),
   testEnvironment: "node",
   testMatch: ["**/?(*.)?(spec).js"],
   testTimeout: 15000,
