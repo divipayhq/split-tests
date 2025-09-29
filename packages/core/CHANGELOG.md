@@ -1,5 +1,12 @@
 # @split-tests/core
 
+## 0.2.2
+
+### Patch Changes
+
+- Updated dependencies
+  - fast-xml-parser@4.2.7
+
 ## 0.2.1
 
 ### Patch Changes

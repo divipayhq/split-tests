@@ -1,6 +1,6 @@
 {
   "name": "@split-tests/core",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "internal",
   "author": {
     "name": "Kamil Kisiela",
@@ -35,6 +35,6 @@
     "prepack": "bob prepack"
   },
   "dependencies": {
-    "fast-xml-parser": "4.2.4"
+    "fast-xml-parser": "~4.2.7"
   }
 }
