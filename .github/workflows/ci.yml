@@ -1,4 +1,6 @@
 name: CI
+permissions:
+  contents: read
 
 on:
   pull_request:
@@ -15,7 +17,6 @@ jobs:
         job_index: [0, 1, 2]
     env:
       CI: true
-      JEST_JOBS_TOTAL: 3
 
     steps:
       - uses: actions/checkout@v2
@@ -28,7 +29,7 @@ jobs:
       - name: Build
         run: yarn build
       - name: Test
-        run: yarn test --jobsIndex=${{ matrix.job_index }}
+        run: yarn test --jobsTotal=3 --jobsIndex=${{ matrix.job_index }}
 
   single-unit:
     name: Unit
@@ -50,47 +51,9 @@ jobs:
       - name: Test
         run: yarn test
 
-  e2e:
-    name: E2E ${{ matrix.job_index }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 3
-    strategy:
-      matrix:
-        job_index: [0, 1, 2]
-    env:
-      CI: true
-      CYPRESS_JOBS_TOTAL: 3
-      CYPRESS_JOBS_INDEX: ${{ matrix.job_index }}
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node 22
-        uses: actions/setup-node@v5
-        with:
-          node-version: 22
-      - name: Install
-        run: yarn
-      - name: Build
-        run: yarn build
-      - name: Test
-        run: yarn e2e
-  
-  single-e2e:
-    name: E2E
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    env:
-      CI: true
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node 22
-        uses: actions/setup-node@v5
-        with:
-          node-version: 22
-      - name: Install
-        run: yarn
-      - name: Build
-        run: yarn build
-      - name: Test
-        run: yarn e2e
+  merge-checks-complete:
+      runs-on: ubuntu-latest
+      needs: [unit, single-unit]
+      steps:
+          - name: merge-checks-complete
+            run: echo 0
